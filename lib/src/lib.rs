@@ -56,7 +56,7 @@
 //! let a = LargeSecretInteger::from_literal(1);
 //! let b = LargeSecretInteger::from_literal(2);
 //! let c = a + b;
-//! let result = std::panic::catch_unwind(|| {
+//! let result = core::panic::catch_unwind(|| {
 //!     // This panics because comparing secret math integers is currently not support.
 //!     assert!(c.equal(LargeSecretInteger::from_literal(3)));
 //! });
@@ -78,6 +78,13 @@
 //! Signed secret integers: `I8, I16, I32, I64, I128`
 //!
 //! See the [secret integers](`secret_integers`) for details.
+
+#![no_std]
+
+#[cfg(all(feature = "alloc", not(feature = "std")))]
+extern crate alloc;
+#[cfg(feature = "std")]
+extern crate std as alloc;
 
 pub mod array;
 mod bigint_integers;

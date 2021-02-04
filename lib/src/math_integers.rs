@@ -14,7 +14,7 @@
 //! let a = LargeSecretInteger::from_literal(1);
 //! let b = LargeSecretInteger::from_literal(2);
 //! let c = a + b;
-//! let result = std::panic::catch_unwind(|| {
+//! let result = core::panic::catch_unwind(|| {
 //!     // This panics because comparing secret math integers is currently not support.
 //!     assert!(c.equal(LargeSecretInteger::from_literal(3)));
 //! });
