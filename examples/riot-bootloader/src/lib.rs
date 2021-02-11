@@ -1,3 +1,4 @@
+#![no_std]
 use hacspec_lib::*;
 
 /// "RIOT"
@@ -55,7 +56,7 @@ pub fn value(x: Fletcher) -> u32 {
 /// 2. Integer representing the partition version
 /// 3. Address after the allocated space for the header
 /// 4. Checksum of riotboot_hdr
-type Header = (u32, u32, u32, u32);
+pub type Header = (u32, u32, u32, u32);
 
 fn header_as_u16_slice(h: Header) -> Seq<u16> {
     let (magic, seq_number, start_addr, _) = h;
