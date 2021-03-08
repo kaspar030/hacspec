@@ -93,15 +93,17 @@ pub fn is_valid_header(h: Header) -> bool {
 
 pub fn choose_image(images: Seq<Header>) -> (bool, u32) {
     let mut image = 0u32;
+    let mut image_seq_number = 0u32;
     let mut image_found = false;
 
     for i in 0..images.len() {
         let header = images[i];
         let (magic_number, seq_number, start_addr, checksum) = header;
         if is_valid_header((magic_number, seq_number, start_addr, checksum)) {
-            let change_image = !(image_found && (seq_number <= image));
+            let change_image = !(image_found && (seq_number <= image_seq_number));
             if change_image {
                 image = start_addr;
+                image_seq_number = seq_number;
                 image_found = true;
             }
         }
